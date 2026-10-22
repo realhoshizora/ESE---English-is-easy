@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESE - English is Easy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- MODAL ĐỔI TÊN HỌC VIÊN -->
+  <div id="name-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-box">
+      <h2>CHANGE NAMES</h2>
+      <div class="input-group">
+        <input type="text" id="name-p1" placeholder="Student 1 Name">
+        <input type="text" id="name-p2" placeholder="Student 2 Name">
+      </div>
+      <button class="pixel-btn motion-btn" onclick="saveNames()">SAVE</button>
+    </div>
+  </div>
+
+  <!-- POPUP GAME OVER KHI HẾT TIM -->
+  <div id="gameover-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-box">
+      <h2 id="gameover-title" style="color: #ef4444; font-size: 24px;">GAME OVER!</h2>
+      <p id="gameover-msg" style="font-size: 14px; font-weight: bold; margin: 16px 0; line-height: 1.5;"></p>
+      <button class="pixel-btn motion-btn btn-warn" onclick="resetCurrentGame()">PLAY AGAIN 🔄</button>
+    </div>
+  </div>
+
+  <div class="ese-app-container">
+    
+    <!-- THANH ĐIỀU HƯỚNG APP HUB -->
+    <header class="ese-header">
+      <div class="brand-zone">
+        <span class="ese-logo">ESE</span>
+        <span class="ese-slogan">ENGLISH IS EASY</span>
+      </div>
+
+      <div class="hub-control">
+        <label>TOPIC:</label>
+        <select id="lessonSelect" class="pixel-select motion-btn" onchange="switchLesson(this.value)">
+          <option value="directions">Lesson 12.2: Directions</option>
+          <option value="travel">Lesson 13: Travel & Holidays</option>
+          <option value="hotel">Lesson 14: Hotel & Accommodation</option>
+          <option value="grammar_review">Grammar Review: Present vs Past vs Future</option>
+        </select>
+      </div>
+
+      <div class="hub-control">
+        <label>GAME:</label>
+        <div class="game-tabs">
+          <button class="tab-btn motion-btn active" id="tab-game1" onclick="switchGame('pair')">1. COOL PAIR</button>
+          <button class="tab-btn motion-btn" id="tab-game2" onclick="switchGame('goalkeeper')">2. GOAL STRIKER</button>
+          <button class="tab-btn motion-btn" id="tab-game3" onclick="switchGame('light')">3. RED/GREEN LIGHT</button>
+          <button class="tab-btn motion-btn" id="tab-game4" onclick="switchGame('wordguess')">4. WORD GUESS</button>
+          <button class="tab-btn motion-btn" id="tab-game5" onclick="switchGame('scramble')">5. SENTENCE SCRAMBLE</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- BẢNG ĐIỂM HỌC VIÊN -->
+    <div class="scoreboard-bar">
+      <div class="player-slot" id="slot-p1">
+        <span class="turn-star" id="star-p1">★</span>
+        <div class="p-badge" style="background: #2563eb;">
+          <span id="label-p1">Student 1</span>: <b id="score-p1">0 PTS</b>
+        </div>
+        <div class="hearts-track" id="hearts-p1">❤️❤️❤️</div>
+      </div>
+
+      <div class="center-actions">
+        <button class="pixel-btn motion-btn btn-sm" onclick="openNameModal()">CHANGE NAME</button>
+        <button class="pixel-btn motion-btn btn-sm btn-warn" onclick="resetCurrentGame()">RESTART</button>
+      </div>
+
+      <div class="player-slot" id="slot-p2">
+        <span class="turn-star" id="star-p2">★</span>
+        <div class="p-badge" style="background: #f97316;">
+          <span id="label-p2">Student 2</span>: <b id="score-p2">0 PTS</b>
+        </div>
+        <div class="hearts-track" id="hearts-p2">❤️❤️❤️</div>
+      </div>
+    </div>
+
+    <!-- KHU VỰC SÂN CHƠI CHÍNH -->
+    <main class="game-arena" id="gameArena"></main>
+
+    <!-- FOOTER HƯỚNG DẪN -->
+    <footer class="ese-footer">
+      <div id="systemMsg">WELCOME TO ESE! CHOOSE A PAIR TO PLAY.</div>
+    </footer>
+
+    <!-- MUSIC PLAYER: dùng các tệp nhạc mà bạn có quyền sử dụng -->
+    <section class="music-player" aria-label="Trình phát nhạc nền">
+      <div class="music-player-heading">
+        <div>
+          <span class="music-eyebrow">🎼 NHẠC NỀN</span>
+          <h2>Ghibli shuffle</h2>
+        </div>
+        <span id="musicStatus" class="music-status" aria-live="polite">Chưa có nhạc</span>
+      </div>
+
+      <p id="musicTrackTitle" class="music-track-title" aria-live="polite">Chọn các tệp nhạc để bắt đầu</p>
+      <audio id="backgroundAudio" preload="none"></audio>
+
+      <div class="music-controls">
+        <button id="musicToggle" class="pixel-btn motion-btn" type="button" disabled>▶ Phát</button>
+        <button id="musicRandom" class="pixel-btn motion-btn music-secondary-btn" type="button" disabled>🔀 Bài ngẫu nhiên</button>
+        <button id="musicPick" class="pixel-btn motion-btn music-secondary-btn" type="button">＋ Chọn nhạc</button>
+        <input id="musicFiles" type="file" accept="audio/*" multiple hidden>
+        <label class="volume-control" for="musicVolume">Âm lượng
+          <input id="musicVolume" type="range" min="0" max="1" step="0.05" value="0.25">
+        </label>
+      </div>
+
+      <p class="music-note">Gợi ý: Merry-Go-Round of Life, One Summer’s Day, Carrying You, Always With Me. Hãy chọn tệp nhạc bạn có quyền sử dụng; trình duyệt không tự phát nhạc.</p>
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

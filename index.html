@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESE Online - Join Game</title>
+  <link rel="stylesheet" href="online.css">
+</head>
+<body>
+  <div class="online-wrap">
+
+    <!-- MÀN HÌNH NHẬP MÃ PIN & TÊN -->
+    <section id="screen-join" class="online-screen active">
+      <div class="join-logo">ESE <span>ENGLISH IS EASY</span></div>
+      <h1>🎮 JOIN THE GAME</h1>
+      <br>
+      <input id="inputPin" class="online-input" type="text" inputmode="numeric" maxlength="6" placeholder="GAME PIN">
+      <input id="inputName" class="online-input" type="text" maxlength="20" placeholder="YOUR NAME">
+      <button id="btnJoin" class="online-btn online-btn-primary">ENTER 🚀</button>
+      <p id="joinError" class="online-error"></p>
+    </section>
+
+    <!-- PHÒNG CHỜ -->
+    <section id="screen-lobby" class="online-screen">
+      <div class="lobby-card">
+        <div class="lobby-spinner">⏳</div>
+        <h2>Hi, <span id="lobbyName"></span>!</h2>
+        <p>Waiting for the host to start the game...</p>
+      </div>
+    </section>
+
+    <!-- HỌC SINH ĐÃ HẾT TIM -->
+    <section id="screen-eliminated" class="online-screen">
+      <div class="lobby-card">
+        <div class="lobby-spinner">💔</div>
+        <h2>You're out of hearts!</h2>
+        <p>Watch the leaderboard until the game ends.</p>
+        <p class="final-score">Your score: <b id="eliminatedScore">0</b></p>
+      </div>
+    </section>
+
+    <!-- CÂU HỎI -->
+    <section id="screen-question" class="online-screen">
+      <div class="q-header">
+        <span id="qCounter">Question 1/10</span>
+        <span id="qHearts">❤️❤️❤️</span>
+      </div>
+      <div class="timer-bar-track"><div id="timerBar" class="timer-bar-fill"></div></div>
+      <div class="q-text" id="qText">Loading question...</div>
+      <div class="q-options" id="qOptions"></div>
+    </section>
+
+    <!-- ĐÃ TRẢ LỜI, CHỜ NGƯỜI KHÁC -->
+    <section id="screen-answered" class="online-screen">
+      <div class="lobby-card">
+        <div id="answerResultIcon" class="lobby-spinner">⌛</div>
+        <h2 id="answerResultText">Answer submitted!</h2>
+        <p>Waiting for other players...</p>
+      </div>
+    </section>
+
+    <!-- REVEAL / LEADERBOARD GIỮA CHỪNG -->
+    <section id="screen-reveal" class="online-screen">
+      <h2>📣 Answer Revealed</h2>
+      <p class="reveal-correct">Correct answer: <b id="revealCorrectText"></b></p>
+      <p id="revealHint" class="reveal-hint"></p>
+      <h3>🏆 LEADERBOARD</h3>
+      <div id="leaderboardList" class="leaderboard-list"></div>
+    </section>
+
+    <!-- KẾT THÚC GAME -->
+    <section id="screen-gameover" class="online-screen">
+      <h1>🎉 GAME OVER!</h1>
+      <h3>FINAL LEADERBOARD</h3>
+      <div id="finalLeaderboardList" class="leaderboard-list"></div>
+    </section>
+
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="join.js"></script>
+</body>
+</html>

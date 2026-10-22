@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESE Online - Host Console</title>
+  <link rel="stylesheet" href="online.css">
+</head>
+<body>
+  <div class="online-wrap">
+
+    <!-- MÀN HÌNH THIẾT LẬP PHÒNG -->
+    <section id="host-screen-setup" class="online-screen active">
+      <h1>🎮 ESE ONLINE - HOST CONSOLE</h1>
+      <br>
+
+      <div class="setup-card">
+        <label style="font-weight:bold; width:100%;">TOPIC:
+          <select id="lessonSelect" class="online-select"></select>
+        </label>
+
+        <div class="pin-display">
+          GAME PIN: <span id="pinValue">------</span>
+          <button id="btnNewSession" class="online-btn online-btn-sm">NEW SESSION 🔄</button>
+        </div>
+        <p class="join-url">Students go to: <b id="joinUrlText"></b></p>
+
+        <h3>PLAYERS JOINED (<span id="playerCount">0</span>)</h3>
+        <div id="playerGrid" class="player-grid"></div>
+
+        <button id="btnStartGame" class="online-btn online-btn-primary">START GAME ▶</button>
+        <p id="hostError" class="online-error"></p>
+      </div>
+    </section>
+
+    <!-- MÀN HÌNH CÂU HỎI (HOST) -->
+    <section id="host-screen-question" class="online-screen">
+      <div class="q-header">
+        <span id="hostQCounter">Question 1/10</span>
+        <span id="hostAnswerProgress">0/0 answered</span>
+      </div>
+      <div class="timer-bar-track"><div id="hostTimerBar" class="timer-bar-fill"></div></div>
+      <div class="q-text" id="hostQText"></div>
+      <button id="btnForceReveal" class="online-btn online-btn-warn">SHOW ANSWER NOW ⏭</button>
+    </section>
+
+    <!-- MÀN HÌNH REVEAL (HOST) -->
+    <section id="host-screen-reveal" class="online-screen">
+      <h2>✅ Correct Answer: <span id="hostCorrectAnswer"></span></h2>
+      <p id="hostHint" class="reveal-hint"></p>
+      <h3>🏆 LEADERBOARD</h3>
+      <div id="hostLeaderboardList" class="leaderboard-list"></div>
+      <button id="btnNextQuestion" class="online-btn online-btn-primary">NEXT QUESTION ▶</button>
+      <button id="btnEndGame" class="online-btn online-btn-warn">END GAME ⏹</button>
+    </section>
+
+    <!-- MÀN HÌNH KẾT THÚC (HOST) -->
+    <section id="host-screen-gameover" class="online-screen">
+      <h1>🏁 FINAL RESULTS</h1>
+      <div id="hostFinalLeaderboard" class="leaderboard-list"></div>
+      <button id="btnBackToSetup" class="online-btn online-btn-primary">NEW SESSION 🔄</button>
+    </section>
+
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="host.js"></script>
+</body>
+</html>
